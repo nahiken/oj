@@ -1,0 +1,7 @@
+name: oj
+version: 1.1.0
+description: "Read-only OJ tools for the OJ tutor: learning context + skill search"
+author: "OJ"
+provides_tools:
+  - get_learning_context
+  - search_skill

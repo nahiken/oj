@@ -1,0 +1,54 @@
+import { getCurrentUser, login, loginByCode, logout } from '@/api/user'
+import type { AccountLoginReq, CodeLoginReq, UserVo } from '@/api/user/types'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const useUserStore = defineStore('user', () => {
+  const isLoggedIn = ref(false)
+  const userInfo = ref<UserVo | null>(null)
+  const router = useRouter()
+
+  const refreshStore = async () => {
+    try {
+      const res = await getCurrentUser()
+      isLoggedIn.value = res.data.data != null
+      userInfo.value = res.data.data || null
+    } catch {
+      // Not being logged in is a normal state, not a failed navigation:
+      // this used to reject and leave the router guard without next().
+      isLoggedIn.value = false
+      userInfo.value = null
+    }
+  }
+
+  const loginStore = async (data: AccountLoginReq) => {
+    const res = await login(data)
+    isLoggedIn.value = res.data.code === 200
+    userInfo.value = res.data.data || null
+  }
+
+  const loginByCodeStore = async (data: CodeLoginReq) => {
+    const res = await loginByCode(data)
+    isLoggedIn.value = res.data.code === 200
+    userInfo.value = res.data.data || null
+  }
+
+  const logoutStore = async () => {
+    await logout()
+    isLoggedIn.value = false
+    userInfo.value = null
+    router.push('/login')
+  }
+
+  return {
+    isLoggedIn,
+    userInfo,
+    refresh: refreshStore,
+    login: loginStore,
+    loginByCode: loginByCodeStore,
+    logout: logoutStore,
+  }
+})
+
+export default useUserStore

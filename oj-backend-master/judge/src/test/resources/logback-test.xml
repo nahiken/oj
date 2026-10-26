@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 单测只需要结论：默认 WARN，判题包 INFO。避免 Lettuce/Spring 的 DEBUG 淹没测试输出。 -->
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.oj" level="INFO" />
+    <logger name="org.springframework" level="WARN" />
+    <logger name="io.lettuce" level="WARN" />
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

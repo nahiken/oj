@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+      "problemId": { "type": "long" },
+      "title": {
+        "type": "text",
+        "analyzer": "standard",
+        "fields": {
+          "smartcn": { "type": "text", "analyzer": "smartcn" }
+        }
+      },
+      "content": {
+        "properties": {
+          "en": { "type": "text", "analyzer": "standard" },
+          "zh": { "type": "text", "analyzer": "smartcn" }
+        }
+      },
+      "tags": { "type": "keyword" },
+      "difficulty": { "type": "keyword" },
+      "lang": { "type": "keyword" },
+      "source": { "type": "keyword" },
+      "isDelete": { "type": "boolean" },
+      "updateTime": { "type": "date", "format": "epoch_millis" },
+      "modelId": { "type": "keyword" },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 384,
+        "index": true,
+        "similarity": "cosine"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+package com.oj.codesandbox.sdk;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.oj.codesandbox.sdk.client.CodeSandboxClient;
+import com.oj.codesandbox.sdk.constant.UrlConstant;
+
+import lombok.Data;
+
+@Configuration
+@ConfigurationProperties("oj.code-sandbox")
+@Data
+public class CodeSandboxClientAutoConfiguration {
+    private String accessKey;
+    private String secretKey;
+    private String gatewayHost = UrlConstant.GATEWAY_HOST;
+
+    @Bean
+    public CodeSandboxClient codeSandboxClient() {
+        return new CodeSandboxClient(accessKey, secretKey, gatewayHost);
+    }
+}

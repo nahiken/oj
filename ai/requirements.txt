@@ -1,0 +1,9 @@
+# Version record only. `pip` is broken on this machine (its proxy points at a
+# port nobody listens on), so this file documents what the service runs on
+# rather than telling anyone to install it.
+fastapi==0.127.0
+uvicorn==0.40.0
+pydantic==2.12.0
+sse-starlette==3.4.8
+httpx==0.28.0
+openai==2.44.0

@@ -1,0 +1,9 @@
+POST http://127.0.0.1:8024/api/judge/run
+Content-Type: application/json
+Cookie: token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjE4NDg2NTMxNDk4MTI5NTMwODgsInVzZXJSb2xlIjoiYWRtaW4iLCJleHAiOjE3NDU1NzAwNDZ9.Xn1DvQk9NefxVWwHVwi88gGFEmIyfj0bk_wY5dr3-cs
+
+{
+  "inputList": ["1 2", "2 3", " 4 5"],
+  "code": "import java.util.Scanner;public class Main {public static void main(String args[]) throws Exception {try (Scanner cin = new Scanner(System.in)) {int a = cin.nextInt(), b = cin.nextInt();System.out.println(a + b);}}}",
+  "language": "Java"
+}

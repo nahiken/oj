@@ -1,0 +1,13 @@
+{
+  "note": "Expected values for benchmark/run-p5.ps1. Numbers that belong to the data (document counts, fixture band sizes) are pinned here; quality floors are regression guards, not targets.",
+  "documents": 523,
+  "evalQueries": 100,
+  "bandCounts": { "high": 30, "mid": 53, "low": 17 },
+  "enExpectedId": 910002,
+  "zhExpectedId": 920001,
+  "queriesWithHitsFloor": 95,
+  "hitRate10Floor": 0.5,
+  "mrrFloor": 0.3,
+  "latencyP95Ms": 1000,
+  "latencySamples": 200
+}

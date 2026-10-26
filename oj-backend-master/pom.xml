@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.oj</groupId>
+    <artifactId>oj-backend</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+        <relativePath />
+    </parent>
+
+    <modules>
+        <module>common</module>
+        <module>user</module>
+        <module>code-sandbox</module>
+        <module>gateway</module>
+        <module>judge</module>
+        <module>code-sandbox-sdk</module>
+        <module>api</module>
+        <module>code-sandbox-sdk-test</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 与本地 Maven 仓库对齐：Boot 2.7.18 默认管理 2.4.17，本机仓库只有 2.4.7 -->
+        <spring-amqp.version>2.4.7</spring-amqp.version>
+        <!-- 本机仓库只有 5.14.2；5.14.x 与 spring-rabbit 2.4.x 协议兼容 -->
+        <amqp-client.version>5.14.2</amqp-client.version>
+        <spring-cloud-dependencies.version>2021.0.5</spring-cloud-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2021.0.5.0</spring-cloud-alibaba-dependencies.version>
+        <dubbo-bom.version>3.3.0</dubbo-bom.version>
+    </properties>
+
+    <!-- 确保打出来的jar包能直接运行 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--
+              本机离线仓库只有 spring-messaging 5.3.23（其余 spring 模块为 5.3.39）。
+              spring 5.3.x 同一 minor 内保持二进制兼容，这里只降级 messaging 模块。
+              联网环境可删掉本段，恢复 Boot 默认版本。
+            -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-messaging</artifactId>
+                <version>5.3.23</version>
+            </dependency>
+            <!-- 本机离线仓库只有 amqp-client 5.14.2；5.14.x 与 spring-rabbit 2.4.x 兼容 -->
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>5.14.2</version>
+            </dependency>
+            <!-- spring-cloud-alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring-cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-bom</artifactId>
+                <version>${dubbo-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

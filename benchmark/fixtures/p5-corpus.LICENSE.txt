@@ -1,0 +1,11 @@
+# p5-corpus.en.json 的来源与许可
+
+本文件是 `benchmark/fixtures/p5-corpus.en.json`（500 道英文题面）的归属声明。
+
+- **来源**：Hugging Face 数据集 [`walk-alone/codeforces-problems`](https://huggingface.co/datasets/walk-alone/codeforces-problems) 的 `problems.csv`（题面来自 Codeforces）。
+- **许可**：apache-2.0（以数据集卡片声明为准）。
+- **采样**：按标题与正文长度排序后，用固定种子 `20261020` 抽样 500 条；题目 id 从 `910001` 起按排序结果分配。重新生成见 `benchmark/fetch_p5_corpus.py`。
+- **附加信息**：`difficulty` 来自 Codeforces 公开 API 的 `rating`（<1200 EASY / 1200–1899 MEDIUM / ≥1900 HARD），不做人工改写。
+- **用途**：仅用于本项目 P5 的检索评估（BM25 / Dense / RRF 对照），不是产品题库内容。
+
+`benchmark/fixtures/p5-corpus.zh.json`（20 道中文题）为本项目自行编写，不涉及第三方数据。

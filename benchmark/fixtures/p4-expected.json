@@ -1,0 +1,8 @@
+{
+  "s1Summary": "5 分钟内提交 3 次（通过 0 次），运行 0 次；首错为超出时间限制。",
+  "s2Summary": "1 分钟内提交 1 次（通过 1 次），运行 1 次。",
+  "errorFocusText": "占 100%（3/3）",
+  "weakTagText": "「数组」",
+  "attemptStyleText": "平均提交 1.00 次",
+  "tagName": "数组"
+}

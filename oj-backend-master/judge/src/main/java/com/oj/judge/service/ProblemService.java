@@ -1,0 +1,29 @@
+package com.oj.judge.service;
+
+import java.util.List;
+
+import com.oj.judge.model.dto.problem.ProblemAddReq;
+import com.oj.judge.model.dto.problem.ProblemQueryReq;
+import com.oj.judge.model.dto.problem.ProblemUpdateReq;
+import com.oj.judge.model.entity.Problem;
+import com.oj.judge.model.vo.problem.ProblemVo;
+import com.oj.judge.model.vo.problem.SafeProblemVo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+* @author OJ
+* @description 针对表【problem(题目)】的数据库操作Service
+* @createDate 2024-10-15 19:32:36
+*/
+public interface ProblemService extends IService<Problem> {
+    Long addProblem(ProblemAddReq problemAddReq);
+
+    Page<ProblemVo> listProblemVoByPage(ProblemQueryReq problemQueryReq);
+
+    void updateProblem(ProblemUpdateReq problemUpdateReq);
+
+    Page<SafeProblemVo> listSafeProblemVoByPage(ProblemQueryReq problemQueryReq);
+
+    List<String> getProblemTags();
+}

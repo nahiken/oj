@@ -1,0 +1,4 @@
+{
+  "password": "P7-playwright-1",
+  "note": "Test-only credential for local seeded accounts. Read by scripts/seed_p7_browser_user.py, scripts/solo-session.mjs, benchmark/p7_synthetic_sessions.py and the Playwright spec so the literal lives in one place."
+}

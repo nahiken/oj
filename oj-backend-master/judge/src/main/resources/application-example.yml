@@ -1,0 +1,149 @@
+server:
+  port: 8012
+  servlet:
+    context-path: /judge
+spring:
+  application:
+    name: judge
+  profiles:
+    active: dev # 开发环境
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848} # Nacos地址
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:nacos}
+      config:
+        namespace: public
+        group: rest
+      discovery:
+        namespace: public
+        group: rest
+  config: # nacos作为配置中心的配置
+    import:
+      - "optional:nacos:${spring.application.name}-${spring.profiles.active}.yml"
+  cache:
+    type: redis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${OJ_MYSQL_HOST:127.0.0.1}:3306/oj?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: ${OJ_MYSQL_PASSWORD:change-me}
+    hikari:
+      # 提交路径并发写：默认 10 个连接在 120 并发下会成为排队点（P2 实测）
+      maximum-pool-size: 32
+      minimum-idle: 8
+      connection-timeout: 3000
+  redis:
+    host: ${OJ_REDIS_HOST:127.0.0.1}
+    port: 6379
+    password: ${OJ_REDIS_PASSWORD:}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:127.0.0.1}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: ${RABBITMQ_VHOST:/}
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    cache:
+      channel:
+        # 每次提交都要等 confirm：channel 缓存太小会在高并发下反复建 channel
+        size: 32
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 2
+        concurrency: 2
+        max-concurrency: 4
+        default-requeue-rejected: false
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 当数据库字段使用_连接时这里配置成true
+    # 不要用 StdOutImpl：每条 SQL 同步打印到 stdout，高并发提交下是隐性瓶颈（P2 归因）
+    # 需要看 SQL 时把 logging.level.com.oj.judge.mapper 调成 debug
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  mapper-locations: classpath*:/mapper/**/*.xml # 配置xml文件位置，这里是和@mapperscan注解的作用是不同的，后者是指定dao的位置
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+dubbo:
+  application:
+    name: "${spring.application.name}-dubbo"
+    logger: slf4j
+    protocol: tri
+    qos-enable: false
+  registry:
+    address: nacos://${NACOS_SERVER_ADDR:127.0.0.1:8848}?username=${NACOS_USERNAME:nacos}&password=${NACOS_PASSWORD:nacos}&namespace=public&group=dubbo
+    register-mode: instance
+  protocol:
+    name: tri
+    port: 8032
+oj:
+  user:
+    secret-key: ${OJ_JWT_SECRET:change-me}
+  judge:
+    # sync | async：async 走 MQ，sync 为回滚开关（Worker 不注册）
+    mode: async
+    api-provider: remote
+    async:
+      max-attempt: 3
+      state-ttl-seconds: 86400
+      lease-ttl-ms: 10000
+      lease-renew-interval-ms: 3000
+      lease-renew-enabled: true
+      worker-concurrency: 2
+      retry-delays-ms: [5000, 15000, 45000]
+      reconcile-delay-ms: 30000
+      reconcile-stale-waiting-ms: 60000
+      reconcile-stale-running-ms: 300000
+      publish-confirm-timeout-ms: 2000
+      max-code-bytes: 60000
+      # 提交计数写后置的合并窗口（毫秒）。计数只用于展示，允许秒级滞后
+      submit-counter-flush-ms: 500
+      # 异步发布：请求线程只入本地有界队列，broker confirm 由后台线程等待
+      async-publish-threads: 2
+      async-publish-queue: 8192
+      # 监听并发：决定每档最多有多少个任务在飞；真正并发由 judge.dispatcher 的固定工作线程控制
+      # 权重 4:2:1 由调度器的派发模式实现（空闲档位让出容量），所以 LOW 档监听数可以大于权重
+      high-concurrency: 4
+      normal-concurrency: 8
+      run-concurrency: 1
+      # 加权派发器：8 个工作线程 + 每档有界队列（队列是防御性上限，真正背压点是监听并发度）
+      submit-pool-core: 8
+      submit-pool-queue: 256
+      run-pool-queue: 64
+      # 等待老化：>30s 升一档，>60s 直接 HIGH。
+      # 不要设太小：调度器已经按 4:2:1 加权，5s 阈值会在正常排队时也触发晋升，造成重复投递。
+      aging-enabled: true
+      aging-delay-ms: 2000
+      aging-promote-after-ms: 30000
+      aging-force-high-after-ms: 60000
+      aging-batch: 100
+  # 学习记忆体（契约 docs/design-docs/0004-learning-memory.md）。以下都是默认值，写出来是为了可发现。
+  memory:
+    # false 时 Recorder 空操作、聚合任务不注册、MQ 拓扑不声明，判题链路行为不变
+    enabled: true
+    # amqp | direct：amqp 走 MQ（投递失败仍降级直写），direct 完全不建队列
+    transport: amqp
+    # 会话切分：同 (uid, problem) 内相邻事件间隔超过 30 分钟算新会话
+    episode-gap-ms: 1800000
+    # Episode 扫描周期：ac/dwell 是快速通道，这个周期只负责「静默兜底」
+    episode-interval-ms: 60000
+    pattern-interval-ms: 600000
+    # ac / dwell 落库后立即物化该题会话
+    ac-fast-path: true
+    lookback-days: 7
+    batch-keys: 200
+    max-events-per-session: 500
+    context-episodes: 3
+    context-patterns: 3
+    context-token-budget: 1200
+    payload-max-bytes: 2048
+    client-events-per-minute: 600
+    pattern-window-days: 30
+    pattern-max-episodes: 200

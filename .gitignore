@@ -1,0 +1,62 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / local agent config
+.idea/
+*.iml
+.vscode/
+.claude/
+*.local
+
+# Secrets / local config (never commit)
+.env
+.env.*
+!.env.example
+**/secrets/
+*.key
+*.pem
+# Local application config (example files stay)
+**/src/main/resources/application.yml
+**/src/main/resources/application-*.yml
+!**/src/main/resources/application-example.yml
+
+# Local-only working material (kept on disk, never uploaded)
+docs/
+.scratch/
+openai-advanced/
+resume/
+work/
+.pytest_cache/
+.trash/
+AGENTS.md
+ARCHITECTURE.md
+GLOSSARY.md
+oj-backend-master/doc/
+oj-backend-master/README.md
+oj-frontend-master/README.md
+
+# Runtime artifacts
+.runtime/
+logs/
+tmpCode/
+*.log
+*.pid
+hs_err_pid*
+
+# Build / dependencies (nested .gitignore also covers these)
+target/
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Benchmark output
+benchmark/results/
+
+# 沙箱写入探针残留（无法删除的痕迹文件）
+.dsh-write-probe
+
+# Python bytecode
+__pycache__/
+*.pyc

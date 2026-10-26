@@ -1,0 +1,59 @@
+server:
+  port: 8013
+  servlet:
+    context-path: /sandbox
+spring:
+  application:
+    name: code-sandbox
+  profiles:
+    active: dev # 开发环境
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848} # Nacos地址
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:nacos}
+      config:
+        namespace: public
+        group: rest
+      discovery:
+        namespace: public
+        group: rest
+  config: # nacos作为配置中心的配置
+    import:
+      - "optional:nacos:${spring.application.name}-${spring.profiles.active}.yml"
+# logging:
+#   level:
+#     com.github.dockerjava: DEBUG  # 设置docker-java的日志级别
+oj:
+  code-sandbox:
+    timeout: 1000
+    filename: Main
+    type: docker
+    # 从 native 切到 docker 只改下面这几行（type 已在上方）。
+    # 路径用相对路径时，基准是**沙箱进程的工作目录**，不是仓库根。两个常见起点的写法：
+    #   从仓库根起（mvn/IDE 直接跑 jar）：save-path 用 ./tmpCode，
+    #       mem-script 用 ./oj-backend-master/script/mem.sh
+    #   从 .runtime/run/sandbox 起（docs/RELIABILITY.md 的标准路径，start.bat 会再 cd 到脚本目录）：
+    #       save-path 用 ./tmpCode，mem-script 用 ../../../oj-backend-master/script/mem.sh
+    # 下面按「从仓库根起」写；照抄到别处之前先确认 mem-script 解析出来的那个绝对路径真的存在，
+    # 否则创建容器时的写探针会失败、沙箱整个起不来（日志里 evt=sandbox.slot.factory 会打印解析结果）。
+    docker:
+      # 任意带 javac 的 JDK 镜像均可；官方 openjdk 已停更，示例用 Debian 系的 jenkins/agent。
+      # 镜像的 JDK 版本必须与此前 native 实测的版本一起标注——两者不同，吞吐不可直接对比。
+      jdk-image: jenkins/agent:latest-jdk17
+      docker-host: tcp://127.0.0.1:2375 # Docker Desktop 暴露的本机 TCP（默认 2375）
+      connect-timeout: 30
+      response-timeout: 30
+      memory-limit: 128
+      cpu-count: 4
+      save-path: ./tmpCode # 池工作区根目录（每个槽位一个子目录，绑定到容器 /app）
+      mem-script: ./oj-backend-master/script/mem.sh # 容器内 /script/mem.sh 的来源
+  # 沙箱池：type=docker 时复用常驻容器；enabled=false 退回「每任务新建容器」（A/B 与回滚）
+  sandbox:
+    pool:
+      enabled: true
+      size: 8
+      borrow-timeout-ms: 30000
+      reuse-limit: 200
+      health-check-ms: 30000
+

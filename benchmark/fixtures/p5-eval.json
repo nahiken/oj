@@ -1,0 +1,807 @@
+{
+ "note": "100 hand-authored queries. Query text is a paraphrase of the task (tags + intent), never a copy of the statement. problemId is the ground truth. lexical_overlap is NOT stored here: benchmark/build_p5_eval.py derives it from the corpus, so the fixture cannot drift.",
+ "seed": 20261020,
+ "overlapRule": "en: share of query words present in title+content; zh: share of character bigrams present. bands high>=0.6 mid>=0.3 low<0.3",
+ "queries": [
+  {
+   "id": "q001",
+   "query": "simple addition of two numbers with a twist",
+   "problemId": 910003,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q002",
+   "query": "watering system with data structures and greedy sorting",
+   "problemId": 910009,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q003",
+   "query": "distributing pebbles with simple math and implementation",
+   "problemId": 910015,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q004",
+   "query": "potions with two pointers binary search and dynamic programming",
+   "problemId": 910021,
+   "lang": "en",
+   "lexicalOverlap": 0.286,
+   "band": "low"
+  },
+  {
+   "id": "q005",
+   "query": "arranging crystal balls using divide and conquer geometry",
+   "problemId": 910027,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q006",
+   "query": "counting permutations with combinatorics and dynamic programming",
+   "problemId": 910033,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q007",
+   "query": "sorting several batches with greedy and brute force",
+   "problemId": 910039,
+   "lang": "en",
+   "lexicalOverlap": 0.0,
+   "band": "low"
+  },
+  {
+   "id": "q008",
+   "query": "bender bending rods implementation problem",
+   "problemId": 910045,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q009",
+   "query": "building a short binary string that contains two given strings",
+   "problemId": 910051,
+   "lang": "en",
+   "lexicalOverlap": 0.714,
+   "band": "high"
+  },
+  {
+   "id": "q010",
+   "query": "bit operations with brute force and greedy choices",
+   "problemId": 910057,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q011",
+   "query": "choosing boxers with greedy and sorting",
+   "problemId": 910063,
+   "lang": "en",
+   "lexicalOverlap": 0.25,
+   "band": "low"
+  },
+  {
+   "id": "q012",
+   "query": "buying shovels with brute force and simple math",
+   "problemId": 910069,
+   "lang": "en",
+   "lexicalOverlap": 0.167,
+   "band": "low"
+  },
+  {
+   "id": "q013",
+   "query": "center alignment of text with string implementation",
+   "problemId": 910075,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q014",
+   "query": "splitting a chocolate bar with combinatorics",
+   "problemId": 910081,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q015",
+   "query": "scoreboard problem with binary search and data structures",
+   "problemId": 910087,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q016",
+   "query": "common divisor graph with dsu and number theory",
+   "problemId": 910093,
+   "lang": "en",
+   "lexicalOverlap": 0.667,
+   "band": "high"
+  },
+  {
+   "id": "q017",
+   "query": "editing a correct bracket sequence with a dsu",
+   "problemId": 910099,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q018",
+   "query": "scheduling recurring jobs given their periods",
+   "problemId": 910105,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q019",
+   "query": "cycling in a city graph with dfs",
+   "problemId": 910111,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q020",
+   "query": "decorating an apple tree with greedy and subtree dp",
+   "problemId": 910117,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q021",
+   "query": "counting kicks with graph connectivity and brute force",
+   "problemId": 910123,
+   "lang": "en",
+   "lexicalOverlap": 0.167,
+   "band": "low"
+  },
+  {
+   "id": "q022",
+   "query": "checking whether adjacent letters differ by one in a string",
+   "problemId": 910129,
+   "lang": "en",
+   "lexicalOverlap": 0.571,
+   "band": "mid"
+  },
+  {
+   "id": "q023",
+   "query": "drawing nested brackets as a special output problem",
+   "problemId": 910135,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q024",
+   "query": "ending exams early with a greedy schedule",
+   "problemId": 910141,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q025",
+   "query": "counting subarrays with an even sum using bitmasks and hashing",
+   "problemId": 910147,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q026",
+   "query": "solving an exponential equation by constructive math",
+   "problemId": 910153,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q027",
+   "query": "fire and ice greedy strategy for two armies",
+   "problemId": 910159,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q028",
+   "query": "finding the forgotten episode number in a permutation",
+   "problemId": 910165,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q029",
+   "query": "constructing a string from y to y with minimal cost",
+   "problemId": 910171,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q030",
+   "query": "watering a garden with implementation and simple counting",
+   "problemId": 910177,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q031",
+   "query": "goldberg machine with dynamic programming on trees",
+   "problemId": 910183,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q032",
+   "query": "splitting students into two groups of equal size",
+   "problemId": 910189,
+   "lang": "en",
+   "lexicalOverlap": 0.667,
+   "band": "high"
+  },
+  {
+   "id": "q033",
+   "query": "half of same numbers with brute force number theory",
+   "problemId": 910195,
+   "lang": "en",
+   "lexicalOverlap": 0.571,
+   "band": "mid"
+  },
+  {
+   "id": "q034",
+   "query": "hidden bipartite graph with interactive binary search",
+   "problemId": 910201,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q035",
+   "query": "tracking debts and repayments between people",
+   "problemId": 910207,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q036",
+   "query": "inserting a zero and inverting the prefix constructively",
+   "problemId": 910213,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q037",
+   "query": "johnny and james greedy over a tree",
+   "problemId": 910219,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q038",
+   "query": "knapsack variant with constructive greedy sorting",
+   "problemId": 910225,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q039",
+   "query": "exchanging letters to build a constructive answer",
+   "problemId": 910231,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q040",
+   "query": "lovely matrix with graph dfs and greedy sorting",
+   "problemId": 910237,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q041",
+   "query": "corruption scheme with combinatorics and greedy math",
+   "problemId": 910243,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q042",
+   "query": "manipulating history strings with constructive greedy",
+   "problemId": 910249,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q043",
+   "query": "matrix rank with combinatorics and string suffix structures",
+   "problemId": 910255,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q044",
+   "query": "mice and holes with greedy two pointers",
+   "problemId": 910261,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q045",
+   "query": "lexicographically minimal strings with dp and greedy",
+   "problemId": 910267,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q046",
+   "query": "moodular arithmetic with dsu and number theory",
+   "problemId": 910273,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q047",
+   "query": "multicolored marbles with dynamic programming and math",
+   "problemId": 910279,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q048",
+   "query": "counting nested segments with greedy and sorting",
+   "problemId": 910285,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q049",
+   "query": "number challenge with combinatorics and number theory",
+   "problemId": 910291,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q050",
+   "query": "old floppy drive with binary search over prefix sums",
+   "problemId": 910297,
+   "lang": "en",
+   "lexicalOverlap": 0.571,
+   "band": "mid"
+  },
+  {
+   "id": "q051",
+   "query": "choosing models with dp and number theory",
+   "problemId": 910303,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q052",
+   "query": "cutting paper again with combinatorics and probabilities",
+   "problemId": 910309,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q053",
+   "query": "collecting pearls in a row with greedy",
+   "problemId": 910315,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q054",
+   "query": "permutation game with implementation of the optimal moves",
+   "problemId": 910321,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q055",
+   "query": "phoenix and diamonds with binary search over sorted data",
+   "problemId": 910327,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q056",
+   "query": "poisoned dagger with binary search on the answer",
+   "problemId": 910333,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q057",
+   "query": "predicting the outcome of a game with brute force",
+   "problemId": 910339,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q058",
+   "query": "counting primes inside an interval",
+   "problemId": 910345,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q059",
+   "query": "radio towers with combinatorics and dp",
+   "problemId": 910351,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q060",
+   "query": "ray tracing with hashing and number theory sorting",
+   "problemId": 910357,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q061",
+   "query": "redundant routes on a tree with dp",
+   "problemId": 910363,
+   "lang": "en",
+   "lexicalOverlap": 0.75,
+   "band": "high"
+  },
+  {
+   "id": "q062",
+   "query": "reverse sort with greedy and sorting",
+   "problemId": 910369,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q063",
+   "query": "santa claus and palindromes with data structures",
+   "problemId": 910375,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q064",
+   "query": "removing equal adjacent segments with dsu and two pointers",
+   "problemId": 910381,
+   "lang": "en",
+   "lexicalOverlap": 0.429,
+   "band": "mid"
+  },
+  {
+   "id": "q065",
+   "query": "serval arrays with combinatorics and dp over values",
+   "problemId": 910387,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q066",
+   "query": "singer house with combinatorics on a tree graph",
+   "problemId": 910393,
+   "lang": "en",
+   "lexicalOverlap": 0.8,
+   "band": "high"
+  },
+  {
+   "id": "q067",
+   "query": "space isaac with hashing and number theory",
+   "problemId": 910399,
+   "lang": "en",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q068",
+   "query": "stack sorting with constructive data structures",
+   "problemId": 910405,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q069",
+   "query": "string lcm of two strings with number theory",
+   "problemId": 910411,
+   "lang": "en",
+   "lexicalOverlap": 0.833,
+   "band": "high"
+  },
+  {
+   "id": "q070",
+   "query": "improving a success rate with binary search on the answer",
+   "problemId": 910417,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q071",
+   "query": "filling a table with greedy implementation",
+   "problemId": 910423,
+   "lang": "en",
+   "lexicalOverlap": 0.25,
+   "band": "low"
+  },
+  {
+   "id": "q072",
+   "query": "checking whether a point belongs to a geometric figure",
+   "problemId": 910429,
+   "lang": "en",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q073",
+   "query": "untended antiquity with hashing and data structures",
+   "problemId": 910435,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q074",
+   "query": "tiling a plane with hexagons using arithmetic",
+   "problemId": 910441,
+   "lang": "en",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q075",
+   "query": "train and peter with string matching",
+   "problemId": 910447,
+   "lang": "en",
+   "lexicalOverlap": 0.75,
+   "band": "high"
+  },
+  {
+   "id": "q076",
+   "query": "counting triangles with brute force geometry",
+   "problemId": 910453,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q077",
+   "query": "twin friends with combinatorics and dynamic programming",
+   "problemId": 910459,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q078",
+   "query": "building a uniform string with a repeating pattern",
+   "problemId": 910465,
+   "lang": "en",
+   "lexicalOverlap": 0.4,
+   "band": "mid"
+  },
+  {
+   "id": "q079",
+   "query": "valid bitonic permutations with combinatorics",
+   "problemId": 910471,
+   "lang": "en",
+   "lexicalOverlap": 0.75,
+   "band": "high"
+  },
+  {
+   "id": "q080",
+   "query": "vessels with dsu and tree data structures",
+   "problemId": 910477,
+   "lang": "en",
+   "lexicalOverlap": 0.2,
+   "band": "low"
+  },
+  {
+   "id": "q081",
+   "query": "数组里找两个数加起来等于目标值",
+   "problemId": 920001,
+   "lang": "zh",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q082",
+   "query": "在升序数组里二分查找目标值并返回下标",
+   "problemId": 920002,
+   "lang": "zh",
+   "lexicalOverlap": 0.588,
+   "band": "mid"
+  },
+  {
+   "id": "q083",
+   "query": "字符串里最长的没有重复字符的子串",
+   "problemId": 920003,
+   "lang": "zh",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q084",
+   "query": "把两个升序链表合并成一个新的升序链表",
+   "problemId": 920004,
+   "lang": "zh",
+   "lexicalOverlap": 0.857,
+   "band": "high"
+  },
+  {
+   "id": "q085",
+   "query": "判断括号字符串是否按正确顺序闭合",
+   "problemId": 920005,
+   "lang": "zh",
+   "lexicalOverlap": 0.8,
+   "band": "high"
+  },
+  {
+   "id": "q086",
+   "query": "求二叉树从根到最远叶子的最大深度",
+   "problemId": 920006,
+   "lang": "zh",
+   "lexicalOverlap": 0.733,
+   "band": "high"
+  },
+  {
+   "id": "q087",
+   "query": "每次走一级或两级，问走到第 n 级有多少种走法",
+   "problemId": 920007,
+   "lang": "zh",
+   "lexicalOverlap": 0.667,
+   "band": "high"
+  },
+  {
+   "id": "q088",
+   "query": "用最少硬币凑出目标金额，凑不出返回 -1",
+   "problemId": 920008,
+   "lang": "zh",
+   "lexicalOverlap": 0.6,
+   "band": "high"
+  },
+  {
+   "id": "q089",
+   "query": "把相互重叠的区间合并成不重叠的区间",
+   "problemId": 920009,
+   "lang": "zh",
+   "lexicalOverlap": 0.583,
+   "band": "mid"
+  },
+  {
+   "id": "q090",
+   "query": "找出数组中第 k 大的元素，要求平均线性时间",
+   "problemId": 920010,
+   "lang": "zh",
+   "lexicalOverlap": 0.647,
+   "band": "high"
+  },
+  {
+   "id": "q091",
+   "query": "按层从上到下逐层输出二叉树节点值",
+   "problemId": 920011,
+   "lang": "zh",
+   "lexicalOverlap": 0.533,
+   "band": "mid"
+  },
+  {
+   "id": "q092",
+   "query": "网格里 1 表示陆地，数一数有多少个岛屿",
+   "problemId": 920012,
+   "lang": "zh",
+   "lexicalOverlap": 0.333,
+   "band": "mid"
+  },
+  {
+   "id": "q093",
+   "query": "判断课程先修关系能否排出一个合法顺序",
+   "problemId": 920013,
+   "lang": "zh",
+   "lexicalOverlap": 0.294,
+   "band": "low"
+  },
+  {
+   "id": "q094",
+   "query": "求连续子数组元素和的最大值，要求线性扫描",
+   "problemId": 920014,
+   "lang": "zh",
+   "lexicalOverlap": 0.778,
+   "band": "high"
+  },
+  {
+   "id": "q095",
+   "query": "多次查询数组区间和，要求单次查询常数时间",
+   "problemId": 920015,
+   "lang": "zh",
+   "lexicalOverlap": 0.688,
+   "band": "high"
+  },
+  {
+   "id": "q096",
+   "query": "其他数字都出现两次，找出只出现一次的那个数",
+   "problemId": 920016,
+   "lang": "zh",
+   "lexicalOverlap": 0.5,
+   "band": "mid"
+  },
+  {
+   "id": "q097",
+   "query": "求一组字符串的最长公共前缀",
+   "problemId": 920017,
+   "lang": "zh",
+   "lexicalOverlap": 0.917,
+   "band": "high"
+  },
+  {
+   "id": "q098",
+   "query": "求无向连通图最小生成树的边权总和",
+   "problemId": 920018,
+   "lang": "zh",
+   "lexicalOverlap": 0.867,
+   "band": "high"
+  },
+  {
+   "id": "q099",
+   "query": "用插入删除替换把第一个字符串变成第二个，求最少操作数",
+   "problemId": 920019,
+   "lang": "zh",
+   "lexicalOverlap": 0.792,
+   "band": "high"
+  },
+  {
+   "id": "q100",
+   "query": "大小为 k 的滑动窗口里每一步的最大值",
+   "problemId": 920020,
+   "lang": "zh",
+   "lexicalOverlap": 0.467,
+   "band": "mid"
+  }
+ ]
+}

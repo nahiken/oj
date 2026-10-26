@@ -1,0 +1,22 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+      "skillId": { "type": "long" },
+      "name": { "type": "text", "analyzer": "smartcn" },
+      "content": { "type": "text", "analyzer": "smartcn" },
+      "tags": { "type": "keyword" },
+      "scope": { "type": "keyword" },
+      "uid": { "type": "keyword" },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 384,
+        "index": true,
+        "similarity": "cosine"
+      }
+    }
+  }
+}

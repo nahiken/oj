@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oj.judge.mapper.ProblemSubmitMapper">
+
+    <resultMap id="BaseResultMap" type="com.oj.judge.model.entity.ProblemSubmit">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="language" column="language" jdbcType="VARCHAR"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="judgeInfo" column="judge_info" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="problemId" column="problem_id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,language,code,
+        judge_info,status,problem_id,
+        user_id,create_time,update_time,
+        is_delete
+    </sql>
+
+    <!-- 这里必须使用LEFT JOIN查询 -->
+    <select id="getPassCount" resultType="com.oj.judge.model.vo.problemsubmit.PassCountVo">
+        SELECT COUNT(DISTINCT p.id) AS total_count, COUNT(
+                DISTINCT CASE
+                    WHEN ps.user_id = #{userId}
+                    AND ps.status = 3 THEN p.id
+                END
+            ) AS pass_count
+        FROM
+            problem p
+            LEFT JOIN problem_submit ps ON p.id = ps.problem_id
+            AND ps.user_id = #{userId}
+            AND ps.status = 3
+        WHERE
+            p.difficulty = #{difficulty}
+    </select>
+
+    <select id="getCheckInDates" resultType="java.lang.String">
+        SELECT DISTINCT(DATE(create_time))
+        FROM problem_submit
+        WHERE user_id = #{userId}
+          AND status = 3
+          AND DATE(create_time) &gt;= #{startDate}
+          AND DATE(create_time) &lt; #{endDate}
+    </select>
+</mapper>
